@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+	namespace:名称空间（类似于包名+类名，用于找到 SQL 语句所有的 mapper.xml 文件）
+	指定为接口的全类名
+-->
+<mapper namespace = "com.lft.rbac.mapper.PermissionMapper">
+    <!--<cache/>-->
+
+    <sql id = "selectColumn">
+        id, name, pid, url, gmt_created,icon
+    </sql>
+
+    <sql id = "insertColumn">
+        name, pid, url, gmt_created,icon
+    </sql>
+
+    <insert id = "insertPermission">
+        INSERT INTO t_permission(<include refid = "insertColumn"/>)
+        VALUES (#{name},#{pid},#{url},#{gmtCreated},#{icon});
+    </insert>
+
+    <update id = "updatePermission">
+        UPDATE t_permission
+        SET
+            name = #{name}, url=#{url}
+            WHERE id = #{id}
+    </update>
+
+    <delete id = "deletePermissionById">
+        DELETE
+            FROM t_permission
+            WHERE id = #{id}
+    </delete>
+
+    <select id = "selectRootPermission"
+            resultType = "com.lft.rbac.entity.Permission">
+        SELECT
+        <include refid = "selectColumn"/>
+        FROM t_permission
+        WHERE pid = 0
+    </select>
+
+    <select id = "selectChildPermissions"
+            resultType = "com.lft.rbac.entity.Permission">
+        SELECT
+        <include refid = "selectColumn"/>
+        FROM t_permission
+        WHERE pid = #{pid}
+    </select>
+
+    <select id = "selectAllPermissions"
+            resultType = "com.lft.rbac.entity.Permission">
+        SELECT
+        <include refid = "selectColumn"/>
+        FROM t_permission
+    </select>
+
+    <select id = "selectPermissionById"
+            resultType = "com.lft.rbac.entity.Permission">
+        SELECT
+        <include refid = "selectColumn"/>
+        FROM t_permission
+        WHERE id = #{id}
+    </select>
+
+    <select id = "queryPermissionIdByRoleId"
+            resultType = "java.lang.Long">
+        SELECT permission_id
+            FROM t_role_permission
+            WHERE role_id = #{roleId};
+    </select>
+
+    <select id = "queryPermissionByUser"
+            resultType = "com.lft.rbac.entity.Permission">
+        SELECT *
+            FROM t_permission
+            WHERE id IN (
+                        SELECT permission_id
+                            FROM t_role_permission
+                            WHERE role_id IN (
+                                             SELECT role_id
+                                                 FROM t_user_role
+                                                 WHERE user_id = #{id}
+                            )
+            )
+    </select>
+
+</mapper>

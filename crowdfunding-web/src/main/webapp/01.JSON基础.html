@@ -1,0 +1,41 @@
+<script type="text/javascript">
+    // JSON：JavaScript Object Notation
+    function Student() {
+        this.name = "lisi";
+        this.age = 20;
+    }
+
+    // JS 支持给对象动态添加属性
+    var student = new Student();
+    // student.name = "Lisi";
+
+    var student2 = new Student();
+
+    // alert(student.name);
+    // alert(student2.name);
+
+    // 声明 JSON 对象
+    var object = {};
+    // 动态添加属性与属性值
+    object.name = "Wangwu";
+
+    // alert(object.name);
+
+    // 声明 JSON 对象的时候就初始化属性和属性值
+    var object2 = {
+        name: "Zhaoliu",
+        age: 40
+    };
+    // alert(object2.name + " : " + object2.age)
+
+    // 声明 JSON 数组
+    var array = [];
+    var baseArray = [1, 3, 5, "lft", "中国"];
+    var objArray = [{name: "1", age: 20}, {classname: "class", age: 50}, {type: "annotation", count: 20}];
+
+    // alert(baseArray.length);
+    // alert(objArray.length);
+
+
+    // JSON 字符串，将后台对象，按照 JSON 格式转换为字符串输出到浏览器中，让 JS 当成对象来处理。
+</script>

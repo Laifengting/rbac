@@ -1,0 +1,19 @@
+<script type="text/javascript">
+    // JS 中使用 var 声明的变量就是局部变量，只在大括号的作用域中有效。
+    // JS 中没有使用 var 声明的变量就是全局变量。
+    function test() {
+        var username = "Zhangsan";
+        age = 50; // 就相当于是 window.age = 50
+    }
+
+    test();
+
+    // alert(username);
+    alert(age);
+    // 省略了方法主体
+    window.alert(age);
+    window.document.getElementById();
+
+
+
+</script>

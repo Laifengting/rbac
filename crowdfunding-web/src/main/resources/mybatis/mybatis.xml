@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!--
+		2. settings标签:包含很多重要的设置项
+			子标签：setting:用来设置每一个设置项
+				属性：	name:属性名称
+						value:属性值
+	-->
+    <settings>
+        <!-- 将数据库下划线字段名自动映射到驼峰命令 -->
+        <setting name = "mapUnderscoreToCamelCase"
+                 value = "true"/>
+        <!--
+		关闭使用实际参数名
+		如果不设置，默认开启。旧版本默认关闭。
+		如果开启，SQL中参数可以通过 #{param1} | #{arg0} 获取。
+		如果关闭，SQL中参数可以通过 #{param1} | #{0} 获取
+		-->
+        <setting name = "useActualParamName"
+                 value = "true"/>
+
+        <!-- 配置开启日志 Log4j
+			SLF4J、LOG4J、LOG4J2、JDK_LOGGING、COMMONS_LOGGING、STDOUT_LOGGING、NO_LOGGING
+		-->
+        <setting name = "logImpl"
+                 value = "LOG4J2"/>
+
+        <!-- 修改默认Null -->
+        <setting name = "jdbcTypeForNull"
+                 value = "NULL"/>
+        <!-- 开启延迟加载（懒加载）默认为关，显式指定每个我们需要更改的配置的值，即使它的默认的，防止版本更新带来的变化 -->
+        <setting name = "lazyLoadingEnabled"
+                 value = "true"/>
+        <!-- 如果开启，只要一个方法加了延迟加载的一个属性，其他属性也自动加载。 -->
+        <setting name = "aggressiveLazyLoading"
+                 value = "false"/>
+        <!-- 指定对象的哪些方法触发一次延迟加载。 -->
+        <setting name = "lazyLoadTriggerMethods"
+                 value = "equals,clone,hashCode,toString"/>
+        <!-- 开启全局二级缓存：默认开启 -->
+        <setting name = "cacheEnabled"
+                 value = "true"/>
+    </settings>
+
+</configuration>
